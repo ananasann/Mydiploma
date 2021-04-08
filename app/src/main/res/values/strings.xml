@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Mydiploma</string>
+    <string name="title_theory">Теория</string>
+    <string name="title_tests">Тесты</string>
+    <string name="title_account">Аккаунт</string>
+    <string name="button_theor_theme_1">Тема 1</string>
+    <string name="button_theor_theme_2">Тема 2</string>
+    <string name="button_theor_theme_3">Тема 3</string>
+    <string name="button_theor_theme_4">Тема 4</string>
+    <string name="button_theor_theme_5">Тема 5</string>
+    <string name="button_theor_theme_6">Тема 6</string>
+    <string name="Auth">АВТОРИЗАЦИЯ</string>
+    <string name="hintEmail">Введите ваш EMAIL в домене @edu.hse.ru</string>
+    <string name="hintPassword">Введите ваш пароль</string>
+    <string name="ButtonAuth">Войти</string>
+</resources>

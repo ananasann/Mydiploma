@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.theory.TheoryFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/theory_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:spanCount="2"/>
+
+
+    <!--<Button
+        android:id="@+id/button_theor_theme_1"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:text="@string/button_theor_theme_1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:backgroundTint="@color/gray_200"
+        app:layout_constraintEnd_toStartOf="@+id/button_theor_theme_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="Theme1"/>
+
+    <Button
+        android:id="@+id/button_theor_theme_2"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:text="@string/button_theor_theme_2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:backgroundTint="@color/gray_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_theor_theme_1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="Theme2"/>
+
+    <Button
+        android:id="@+id/button_theor_theme_3"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:text="@string/button_theor_theme_3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:backgroundTint="@color/gray_200"
+        app:layout_constraintEnd_toStartOf="@+id/button_theor_theme_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_theor_theme_1"
+        android:onClick="Theme3"/>
+
+    <Button
+        android:id="@+id/button_theor_theme_4"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:text="@string/button_theor_theme_4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:backgroundTint="@color/gray_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_theor_theme_3"
+        app:layout_constraintTop_toBottomOf="@id/button_theor_theme_2"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="Theme4"/>
+
+    <Button
+        android:id="@+id/button_theor_theme_5"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:onClick="Theme5"
+        android:text="@string/button_theor_theme_5"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:backgroundTint="@color/gray_200"
+        app:layout_constraintEnd_toStartOf="@+id/button_theor_theme_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_theor_theme_3" />
+
+    <Button
+        android:id="@+id/button_theor_theme_6"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:text="@string/button_theor_theme_6"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:backgroundTint="@color/gray_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_theor_theme_5"
+        app:layout_constraintTop_toBottomOf="@id/button_theor_theme_4"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="Theme6"/>
+-->
+
+
+    <TextView
+        android:id="@+id/text_theory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="94dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_theor_theme_5" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
