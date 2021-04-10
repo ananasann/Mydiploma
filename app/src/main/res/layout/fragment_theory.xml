@@ -11,7 +11,10 @@
         android:id="@+id/theory_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:spanCount="2"/>
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
 
 
     <!--<Button
@@ -111,16 +114,6 @@
         android:onClick="Theme6"/>
 -->
 
-
-    <TextView
-        android:id="@+id/text_theory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="94dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_theor_theme_5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
