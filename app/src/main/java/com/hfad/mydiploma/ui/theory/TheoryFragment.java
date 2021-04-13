@@ -12,12 +12,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.mydiploma.ApiInterface;
+import com.hfad.mydiploma.MainActivity;
 import com.hfad.mydiploma.R;
-import com.hfad.mydiploma.dataTheory.ApiClient;
+import com.hfad.mydiploma.ApiClient;
 import com.hfad.mydiploma.dataTheory.Theory;
 import com.hfad.mydiploma.dataTheory.TheoryAdapter;
 
@@ -26,8 +30,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TheoryFragment extends Fragment {
 
@@ -59,7 +61,12 @@ public class TheoryFragment extends Fragment {
         TheoryAdapter.MyClickListener listener = new TheoryAdapter.MyClickListener() {
             @Override
             public void onItemClick(Theory item) {
-                Toast.makeText(getContext(),"TAP " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"TAP " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                TheorQuizFragmant theorQuizFrag = new TheorQuizFragmant();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.theorFragment, theorQuizFrag, "fiaentTag")
+                        .addToBackStack(null)
+                        .commit();
             }
         };
 

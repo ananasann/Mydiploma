@@ -1,4 +1,4 @@
-package com.hfad.mydiploma.dataTheory;
+package com.hfad.mydiploma;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

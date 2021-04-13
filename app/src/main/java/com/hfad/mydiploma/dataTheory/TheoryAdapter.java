@@ -57,7 +57,6 @@ public class TheoryAdapter  extends RecyclerView.Adapter<TheoryAdapter.ViewHolde
         holder.itemTitle.setText(title);
         holder.itemName.setText(itemName);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 mClickListener.onItemClick(theoryOnPosition);
