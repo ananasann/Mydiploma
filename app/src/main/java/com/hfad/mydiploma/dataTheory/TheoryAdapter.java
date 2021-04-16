@@ -9,18 +9,18 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.mydiploma.R;
+import com.hfad.mydiploma.dataTheory.pager.CardData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TheoryAdapter  extends RecyclerView.Adapter<TheoryAdapter.ViewHolder> {
 
 
     public interface MyClickListener {
-        void onItemClick(Theory item);
+        void onItemClick(TheoryCard item);
     }
 
-    private List<Theory> mData;
+    private List<TheoryCard> mData;
     private LayoutInflater mInflater;
     private MyClickListener mClickListener;
 
@@ -31,7 +31,7 @@ public class TheoryAdapter  extends RecyclerView.Adapter<TheoryAdapter.ViewHolde
         this.mClickListener = clickListener;
     }
 
-    public void setList(List<Theory> data) {
+    public void setList(List<TheoryCard> data) {
         this.mData = data;
         notifyDataSetChanged();
         //Уведомить адаптер, что изменился набор данных
@@ -49,7 +49,7 @@ public class TheoryAdapter  extends RecyclerView.Adapter<TheoryAdapter.ViewHolde
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Theory theoryOnPosition = mData.get(position);
+        TheoryCard theoryOnPosition = mData.get(position);
 
         String title = theoryOnPosition.title;
         String itemName = theoryOnPosition.itemName;

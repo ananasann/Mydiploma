@@ -7,24 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.mydiploma.ApiInterface;
-import com.hfad.mydiploma.MainActivity;
 import com.hfad.mydiploma.R;
 import com.hfad.mydiploma.ApiClient;
-import com.hfad.mydiploma.dataTheory.Theory;
+import com.hfad.mydiploma.dataTheory.TheoryCard;
 import com.hfad.mydiploma.dataTheory.TheoryAdapter;
+import com.hfad.mydiploma.dataTheory.pager.CardData;
+import com.hfad.mydiploma.dataTheory.pager.ImageAndDescription;
+import com.hfad.mydiploma.dataTheory.pager.QuestAndAnsOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,7 +32,7 @@ import retrofit2.Response;
 
 public class TheoryFragment extends Fragment {
 
-    List<Theory> listOfDataTheory;
+    List<TheoryCard> listOfDataTheory;
     private RecyclerView theoryRecycler;
     private TheoryAdapter theoryAdapter;
 
@@ -51,18 +50,19 @@ public class TheoryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ApiInterface theoryApi = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<Theory>> theor = theoryApi.getTheor();
+        Call<List<TheoryCard>> theor = theoryApi.getTheor();
 
-        //listOfDataTheory = new ArrayList<Theory>();
-        /*listOfDataTheory.add(new Theory("Тема 1","Фильтрация"));
-        listOfDataTheory.add(new Theory("Тема 2", "Спектр2"));
-        listOfDataTheory.add(new Theory("Тема 3", "Спектр3"));;*/
+
+
+        //List<TheoryCard> listOfTheorCard = new ArrayList<TheoryCard>();
+        //listOfTheorCard.add(new TheoryCard("Тема 1","Фильтрация", listOfCardData));
+        //listOfTheorCard.add(new TheoryCard("Тема 2", "Спектр2", listOfCardData));
 
         TheoryAdapter.MyClickListener listener = new TheoryAdapter.MyClickListener() {
             @Override
-            public void onItemClick(Theory item) {
+            public void onItemClick(TheoryCard item) {
                 //Toast.makeText(getContext(),"TAP " + item.getTitle(),Toast.LENGTH_SHORT).show();
-                TheorQuizFragmant theorQuizFrag = new TheorQuizFragmant();
+                TheorQuizFragment theorQuizFrag = new TheorQuizFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.theorFragment, theorQuizFrag, "fiaentTag")
                         .addToBackStack(null)
@@ -76,10 +76,10 @@ public class TheoryFragment extends Fragment {
         //theoryAdapter.setList(listOfDataTheory);
 
 
-        theor.enqueue(new Callback<List<Theory>>(){ //метод.в очереди
+        theor.enqueue(new Callback<List<TheoryCard>>(){ //метод.в очереди
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onResponse(Call<List<Theory>> call, Response<List<Theory>> response) {
+            public void onResponse(Call<List<TheoryCard>> call, Response<List<TheoryCard>> response) {
                 listOfDataTheory  = response.body();
                 Log.d("henlo", "how are you" + listOfDataTheory);
                 listOfDataTheory.forEach(item -> Log.d("tag",  " look title " + item.getTitle()));
@@ -87,7 +87,7 @@ public class TheoryFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Theory>> call, Throwable t) {
+            public void onFailure(Call<List<TheoryCard>> call, Throwable t) {
                 Log.d("chmo", t.getLocalizedMessage());
             }
         });
