@@ -12,6 +12,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.hfad.mydiploma.R;
 import com.hfad.mydiploma.dataTheory.pager.CardData;
 import com.hfad.mydiploma.dataTheory.pager.PagerAdapter;
@@ -24,6 +26,8 @@ import java.util.List;
 public class TheorQuizFragment extends Fragment {
 
     private PagerAdapter pagerAdapter;
+    private TabLayout tabLayout;
+    private TabLayoutMediator tabLayoutMediator;
     private ViewPager2 pager;
     List<QuestAndAnsOptions> listOfQuestAndAnsOp;
     List<ImageAndDescription> listOfImagAndDiscr;
@@ -35,6 +39,9 @@ public class TheorQuizFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.theor_plus_quiz, container, false);
         pager = (ViewPager2) root.findViewById(R.id.pager);
+
+        tabLayout = (TabLayout) root.findViewById(R.id.tab);
+
         /*Toolbar toolbar = (Toolbar) root.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +103,17 @@ public class TheorQuizFragment extends Fragment {
 
         pagerAdapter = new PagerAdapter(getContext(), listOfCardData);
         pager.setAdapter(pagerAdapter);
+        tabLayoutMediator = new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy(){
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                if (position % 2 == 0){
+                    tab.setIcon(R.drawable.ic_img_and_descr);}
+                else{
+                    tab.setIcon(R.drawable.ic_quest_and_ans_op);
+                }
+            }
+        });
+        tabLayoutMediator.attach();
 
 
     }

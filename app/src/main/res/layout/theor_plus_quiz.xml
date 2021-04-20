@@ -18,18 +18,28 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/pager"/>
+        app:layout_constraintBottom_toTopOf="@+id/tab"/>
 
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        app:tabBackground="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@+id/item_name"
+            app:layout_constraintBottom_toTopOf="@+id/pager"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="wrap_content">
+        </com.google.android.material.tabs.TabLayout>
+    
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        app:layout_constraintTop_toBottomOf="@+id/tab"
         tools:layout_editor_absoluteX="141dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp">
     </androidx.viewpager2.widget.ViewPager2>
 
