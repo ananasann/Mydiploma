@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "139936963255",
+    "project_id": "able-tide-311510",
+    "storage_bucket": "able-tide-311510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139936963255:android:c0f79be7056e18d9f10b32",
+        "android_client_info": {
+          "package_name": "com.hfad.mydiploma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139936963255-0m6thp49f7hdkn0onmmam6i955f3blqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hfad.mydiploma",
+            "certificate_hash": "bd9451aa02996074c9bf869999c193487b3a0d96"
+          }
+        },
+        {
+          "client_id": "139936963255-mk78ochlj3o5oaentnknmbu2dgi9j1mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6QEd800ffSwiOznTCDx-RoTuigRKglYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139936963255-mk78ochlj3o5oaentnknmbu2dgi9j1mt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
