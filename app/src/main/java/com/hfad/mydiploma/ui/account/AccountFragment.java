@@ -2,6 +2,7 @@ package com.hfad.mydiploma.ui.account;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,9 @@ public class AccountFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+
         GoogleSignInAccount buffAcc = ((MainActivity) getActivity()).currAcc;
         bind(buffAcc);
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -65,6 +66,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSignInClient.signOut();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -89,4 +92,6 @@ public class AccountFragment extends Fragment {
             Log.d("check", "nenull");
         }
     }
+
+
 }

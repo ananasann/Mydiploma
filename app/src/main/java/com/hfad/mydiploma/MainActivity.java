@@ -1,5 +1,7 @@
 package com.hfad.mydiploma;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 // Sign in failed, handle failure and update UI
                 // ...
-                Toast.makeText(this, "Неудалось войти", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Не удалось войти", Toast.LENGTH_SHORT).show();
             }
         }
     }
