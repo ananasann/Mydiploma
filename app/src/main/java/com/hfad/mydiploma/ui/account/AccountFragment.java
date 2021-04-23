@@ -27,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.hfad.mydiploma.AuthActivity;
 import com.hfad.mydiploma.MainActivity;
 import com.hfad.mydiploma.R;
 
@@ -56,7 +57,7 @@ public class AccountFragment extends Fragment {
         super.onResume();
 
 
-        GoogleSignInAccount buffAcc = ((MainActivity) getActivity()).currAcc;
+        GoogleSignInAccount buffAcc = GoogleSignIn.getLastSignedInAccount(getContext());//((MainActivity) getActivity()).currAcc;
         bind(buffAcc);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -66,7 +67,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSignInClient.signOut();
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), AuthActivity.class);
                 startActivity(intent);
             }
         });

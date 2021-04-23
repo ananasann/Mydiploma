@@ -54,13 +54,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.auth_google);
-        getSupportActionBar().hide();
+
+        setContentView(R.layout.activity_main);
+        getSupportActionBar().show();
 
         ETemail = (EditText) findViewById(R.id.email);
         ETpassword = (EditText) findViewById(R.id.password);
 
-        GoogleSignInOptions gso =
+       /* GoogleSignInOptions gso =
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestEmail()
                         .setHostedDomain("miem.hse.ru")
@@ -75,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, RC_SIGN_IN);
                 Log.d("blya","");
             }
-        });
+        });*/
 
 
-        /*BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);*/  //БЫЛО ТУТ ИЗНАЧАЛЬНО, НО ТАК РАБОТАТЬ НЕ БУДЕТ, ПОТОМУ ЧТО МЫ СНАЧАЛА ВЫЗЫВАЕМ МАКЕТ АВТОРИЗАЦИИ
+        NavigationUI.setupWithNavController(navView, navController); //БЫЛО ТУТ ИЗНАЧАЛЬНО, НО ТАК РАБОТАТЬ НЕ БУДЕТ, ПОТОМУ ЧТО МЫ СНАЧАЛА ВЫЗЫВАЕМ МАКЕТ АВТОРИЗАЦИИ
     }
 
     @Override
