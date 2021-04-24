@@ -11,6 +11,7 @@
     <string name="button_theor_theme_6">Тема 6</string>
     <string name="Auth">АВТОРИЗАЦИЯ</string>
     <string name="Auth_google">АУТЕНТИФИКАЦИЯ</string>
+    <string name="hintAuth">Пройдите аутентификацию с помощью вашего google-аккаунта в домене @miem.hse.ru</string>
     <string name="hintEmail">Введите ваш EMAIL в домене @edu.hse.ru</string>
     <string name="hintPassword">Введите ваш пароль</string>
     <string name="ButtonAuth">Войти</string>

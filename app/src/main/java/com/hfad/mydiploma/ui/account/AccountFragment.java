@@ -37,7 +37,7 @@ public class AccountFragment extends Fragment {
 
     TextView logOut;
     TextView fmo;
-    TextView group;
+    TextView accEmail;
     ImageView accImage;
     private GoogleSignInClient mSignInClient;
 
@@ -46,7 +46,7 @@ public class AccountFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_account, container, false);
         fmo = root.findViewById(R.id.FMO);
-        group = root.findViewById(R.id.group);
+        accEmail = root.findViewById(R.id.accEmail);
         accImage = root.findViewById(R.id.accImage);
         logOut = root.findViewById(R.id.logOut);
         return root;
@@ -68,6 +68,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 mSignInClient.signOut();
                 Intent intent = new Intent(getContext(), AuthActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -78,7 +79,7 @@ public class AccountFragment extends Fragment {
             Log.d("check", "null");
         } else {
             fmo.setText(acc.getDisplayName());
-            group.setText(acc.getEmail());
+            accEmail.setText(acc.getEmail());
 
             RequestOptions requestOptions = new RequestOptions();
             requestOptions = requestOptions.transform(new RoundedCorners(180));

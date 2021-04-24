@@ -20,31 +20,33 @@
         android:id="@+id/FMO"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:text="ФАМИЛИЯ ИМЯ ОТЧЕСТВО"
+        android:layout_marginEnd="16dp"
+        android:text="ФАМИЛИЯ ИМЯ"
         android:textSize="18dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toEndOf="@+id/accImage"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
 
     <TextView
-        android:id="@+id/group"
+        android:id="@+id/accEmail"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_marginTop="20dp"
         android:textSize="16dp"
-        android:text="Группа"
+        android:text="E-mail"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="@id/FMO"
         app:layout_constraintTop_toBottomOf="@id/FMO"
-        />
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
