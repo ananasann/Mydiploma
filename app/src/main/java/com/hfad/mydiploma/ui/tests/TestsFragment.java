@@ -61,11 +61,11 @@ public class TestsFragment extends Fragment {
             @Override
             public void onItemClick(TestsCard item) {
                 Toast.makeText(getContext(),"TAP " + item.getTitleTest(),Toast.LENGTH_SHORT).show();
-                /*TheorQuizFragment theorQuizFrag = new TheorQuizFragment();
+                TestThemeFragment testThemeFrag = new TestThemeFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.theorFragment, theorQuizFrag, "fiaentTag")
+                        .add(R.id.testsFrag, testThemeFrag, "fiaentTag")
                         .addToBackStack(null)
-                        .commit();*/
+                        .commit();
             }
         };
 

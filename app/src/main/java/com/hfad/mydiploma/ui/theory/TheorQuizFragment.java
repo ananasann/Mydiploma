@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.hfad.mydiploma.R;
+import com.hfad.mydiploma.dataTheory.TheoryAdapter;
+import com.hfad.mydiploma.dataTheory.TheoryCard;
 import com.hfad.mydiploma.dataTheory.pager.CardData;
 import com.hfad.mydiploma.dataTheory.pager.PagerAdapter;
 import com.hfad.mydiploma.dataTheory.pager.ImageAndDescription;
@@ -22,6 +25,7 @@ import com.hfad.mydiploma.dataTheory.pager.QuestAndAnsOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TheorQuizFragment extends Fragment {
 
@@ -81,46 +85,42 @@ public class TheorQuizFragment extends Fragment {
             }
         });*/
 
-        List ansOptions = new ArrayList();
+        List<String> ansOptions = new ArrayList();
+        ansOptions.add("Fuck");
 
-        List <QuestAndAnsOptions> listOfQuestAndAnsOp = new ArrayList<QuestAndAnsOptions>();
-        listOfQuestAndAnsOp.add(new QuestAndAnsOptions("Вопрос",ansOptions,1));
-        listOfQuestAndAnsOp.add(new QuestAndAnsOptions("Другой вопрос",ansOptions,2));
+        List<QuestAndAnsOptions> listOfQuestAndAnsOp = new ArrayList<QuestAndAnsOptions>();
+        listOfQuestAndAnsOp.add(new QuestAndAnsOptions("Вопрос", ansOptions, 1));
+        listOfQuestAndAnsOp.add(new QuestAndAnsOptions("Другой вопрос", ansOptions, 2));
 
         List<ImageAndDescription> listOfImagAndDiscr = new ArrayList<ImageAndDescription>();
-        listOfImagAndDiscr.add( new ImageAndDescription("https://cdn25.img.ria.ru/images/156087/28/1560872802_0:778:1536:1642_600x0_80_0_0_606c2d47b6d37951adc9eaf750de22f0.jpg","тут чуть теории"));
+        listOfImagAndDiscr.add(new ImageAndDescription("чуть-чуть теории", "https://cdn25.img.ria.ru/images/156087/28/1560872802_0:778:1536:1642_600x0_80_0_0_606c2d47b6d37951adc9eaf750de22f0.jpg"));
 
-        listOfImagAndDiscr.add( new ImageAndDescription("https://images11.esquire.ru/upload/img_cache/acf/acfbe9979332a4bab9cec3485f678f61_ce_1080x673x0x0_cropped_960x600.jpg","и тут теория"));
+        listOfImagAndDiscr.add(new ImageAndDescription("и тут теория", "https://images11.esquire.ru/upload/img_cache/acf/acfbe9979332a4bab9cec3485f678f61_ce_1080x673x0x0_cropped_960x600.jpg"));
 
         List<Object> listOfCardData = new ArrayList<Object>();
-        listOfCardData.add(listOfImagAndDiscr);
-        listOfCardData.add(listOfQuestAndAnsOp);
-        listOfCardData.add(listOfImagAndDiscr);
-        listOfCardData.add(listOfQuestAndAnsOp);
-        listOfCardData.add(listOfImagAndDiscr);
-        listOfCardData.add(listOfQuestAndAnsOp);
+        listOfCardData.add(listOfImagAndDiscr.get(0));
+        listOfCardData.add(listOfQuestAndAnsOp.get(0));
+        listOfCardData.add(listOfImagAndDiscr.get(1));
+        listOfCardData.add(listOfQuestAndAnsOp.get(1));
+        //listOfCardData.add(listOfImagAndDiscr.get(2));
+        // listOfCardData.add(listOfQuestAndAnsOp.get(2));
 
 
         pagerAdapter = new PagerAdapter(getContext(), listOfCardData);
         pager.setAdapter(pagerAdapter);
-        tabLayoutMediator = new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy(){
+        tabLayoutMediator = new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                if (position % 2 == 0){
-                    tab.setIcon(R.drawable.ic_img_and_descr);}
-                else{
+                if (position % 2 == 0) {
+                    tab.setIcon(R.drawable.ic_img_and_descr);
+                } else {
                     tab.setIcon(R.drawable.ic_quest_and_ans_op);
                 }
             }
         });
         tabLayoutMediator.attach();
 
-
     }
-
-
-
-
 
 
     //ССЫЛКА НИЖЕ ПРЕДНАЗНАЧЕНА ДЛЯ КАСТОМИЗАЦИИ КНОПКИ НАЗАД, МОЖНО БУДЕТ ВСТАВИТЬ В ТЕСТЫ И ТОГДА ИЗ НИХ НЕЛЬЗЯ БУДЕТ ВЫЙТИ ДО ПОЛНОГО ВЫПОЛНЕНИЯ

@@ -30,15 +30,18 @@ import com.google.android.gms.tasks.Task;
 import com.hfad.mydiploma.AuthActivity;
 import com.hfad.mydiploma.MainActivity;
 import com.hfad.mydiploma.R;
+import com.hfad.mydiploma.ui.theory.TheorQuizFragment;
 
 import java.util.concurrent.Executor;
 
 public class AccountFragment extends Fragment {
 
+    TextView aboutDev;
     TextView logOut;
     TextView fmo;
     TextView accEmail;
     ImageView accImage;
+    TextView grades;
     private GoogleSignInClient mSignInClient;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,6 +52,8 @@ public class AccountFragment extends Fragment {
         accEmail = root.findViewById(R.id.accEmail);
         accImage = root.findViewById(R.id.accImage);
         logOut = root.findViewById(R.id.logOut);
+        aboutDev = root.findViewById(R.id.aboutDev);
+        grades = root.findViewById(R.id.grades);
         return root;
     }
 
@@ -72,6 +77,30 @@ public class AccountFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        aboutDev.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DevInfFragment devInfFragment = new DevInfFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.accFrag, devInfFragment, "fragTag")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }));
+
+        grades.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GradesFragment gradFragment = new GradesFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.accFrag, gradFragment, "fragTag")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }));
+
+
     }
 
     private void bind(@Nullable GoogleSignInAccount acc) {

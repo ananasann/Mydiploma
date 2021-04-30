@@ -82,7 +82,7 @@ public class TheoryFragment extends Fragment {
             public void onResponse(Call<List<TheoryCard>> call, Response<List<TheoryCard>> response) {
                 listOfDataTheory  = response.body();
                 Log.d("henlo", "how are you" + listOfDataTheory);
-                listOfDataTheory.forEach(item -> Log.d("tag",  " look title " + item.getTitle()));
+                //listOfDataTheory.forEach(item -> Log.d("tag",  " look title " + item.getTitle()));
                 theoryAdapter.setList(listOfDataTheory);
             }
 

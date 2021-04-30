@@ -10,7 +10,7 @@ public class QuestAndAnsOptions {
     String textQuiz;
 
     @SerializedName("ansOptions")
-    List ansOptions;
+    List<String> ansOptions;
 
     @SerializedName("corrAnsNum")
     Integer corrAnsNum;

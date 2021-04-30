@@ -10,10 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.hfad.mydiploma.R;
+import com.hfad.mydiploma.ui.theory.TheorQuizFragment;
 
 import java.util.List;
 
@@ -31,36 +36,56 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolderImDes extends RecyclerView.ViewHolder {
-        ImageView imageUrl;
-        TextView textTheor;
+        ImageView imageUrlH;
+        TextView textTheorH;
 
         ViewHolderImDes(View ImDes) {
             super(ImDes);
-            imageUrl = ImDes.findViewById(R.id.imageView);
-            textTheor = ImDes.findViewById(R.id.text_theor_descr);
+            imageUrlH = ImDes.findViewById(R.id.imageView);
+            textTheorH = ImDes.findViewById(R.id.text_theor_descr);
         }
 
-        public void bind() {
+        public void bind(ImageAndDescription imageAndDescription) {
+            String textTeor = imageAndDescription.textTheor;
+            String imageUrl = imageAndDescription.imageUrl;
+
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions = requestOptions.transform(new RoundedCorners(20));
+            Glide
+                    .with(itemView.getContext())
+                    .load(imageUrl)
+                    .apply(requestOptions)
+                    .into(imageUrlH);
+            Log.d("vse","loxi");
+            textTheorH.setText(textTeor);
             itemView.setBackgroundColor(Color.GRAY);
         }
     }
 
     public class ViewHolderQuesA extends RecyclerView.ViewHolder {
-        TextView textQuiz;
-        TextView ansOptions;
-        TextView corrAnsNum;
+        TextView textQuizH;
+        TextView ansOptionsH;
+        TextView corrAnsNumH;
 
         ViewHolderQuesA(View qA) {
             super(qA);
-            textQuiz = qA.findViewById(R.id.text_quiz);
-            ansOptions = qA.findViewById(R.id.ans_op);
-            corrAnsNum = qA.findViewById(R.id.corr_ans_num);
+            textQuizH = qA.findViewById(R.id.text_quiz);
+            ansOptionsH = qA.findViewById(R.id.ans_op);
+            corrAnsNumH = qA.findViewById(R.id.corr_ans_num);
         }
 
-        public void bind() {
+        public void bind(QuestAndAnsOptions questAndAnsOptions) {
+
+            String textQuiz = questAndAnsOptions.textQuiz;
+            List<String> ansOptions = questAndAnsOptions.ansOptions;
+            Integer corrAnsNum = questAndAnsOptions.corrAnsNum;
+
+            textQuizH.setText(textQuiz);
+            ansOptionsH.setText(ansOptions.get(0));
+            corrAnsNumH.setText(corrAnsNum.toString());
+            
             itemView.setBackgroundColor(Color.DKGRAY);
         }
-
     }
 
     @Override
@@ -109,19 +134,20 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case 0:
                 ViewHolderImDes viewHolderImDes = (ViewHolderImDes)holder;
 
-                viewHolderImDes.bind();
-
+                viewHolderImDes.bind((ImageAndDescription) obgectOnPosition);
                 Log.d("TAG","1");
                 break;
 
             case 2:
                 ViewHolderQuesA viewHolderQuesA = (ViewHolderQuesA)holder;
+
                 Log.d("TAG","2");
-                viewHolderQuesA.bind();
+                viewHolderQuesA.bind((QuestAndAnsOptions) obgectOnPosition);
 
                 break;
         }
     }
+
 
 }
 

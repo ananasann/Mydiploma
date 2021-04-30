@@ -15,4 +15,7 @@
     <string name="hintEmail">Введите ваш EMAIL в домене @edu.hse.ru</string>
     <string name="hintPassword">Введите ваш пароль</string>
     <string name="ButtonAuth">Войти</string>
+    <string name="server_client_id">139936963255-mk78ochlj3o5oaentnknmbu2dgi9j1mt.apps.googleusercontent.com</string>
+    <string name="inf1">• Копылова Полина Андреева pakopylova@miem.hse.ru </string>
+    <string name="inf2">• Парамонова Анна Рэмовна arparamonova@miem.hse.ru</string>
 </resources>
