@@ -17,7 +17,7 @@ public class TheoryAdapter  extends RecyclerView.Adapter<TheoryAdapter.ViewHolde
 
 
     public interface MyClickListener {
-        void onItemClick(TheoryCard item);
+        void onItemClick(TheoryCard item, Integer position);
     }
 
     private List<TheoryCard> mData;
@@ -59,7 +59,7 @@ public class TheoryAdapter  extends RecyclerView.Adapter<TheoryAdapter.ViewHolde
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mClickListener.onItemClick(theoryOnPosition);
+                mClickListener.onItemClick(theoryOnPosition, position);
             }
         });
     }

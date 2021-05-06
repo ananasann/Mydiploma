@@ -2,9 +2,13 @@ package com.hfad.mydiploma.ui.theory;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,17 +19,22 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.hfad.mydiploma.ApiClient;
+import com.hfad.mydiploma.ApiInterface;
 import com.hfad.mydiploma.R;
-import com.hfad.mydiploma.dataTheory.TheoryAdapter;
 import com.hfad.mydiploma.dataTheory.TheoryCard;
 import com.hfad.mydiploma.dataTheory.pager.CardData;
 import com.hfad.mydiploma.dataTheory.pager.PagerAdapter;
 import com.hfad.mydiploma.dataTheory.pager.ImageAndDescription;
 import com.hfad.mydiploma.dataTheory.pager.QuestAndAnsOptions;
+import com.hfad.mydiploma.ui.account.DevInfFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TheorQuizFragment extends Fragment {
 
@@ -33,9 +42,16 @@ public class TheorQuizFragment extends Fragment {
     private TabLayout tabLayout;
     private TabLayoutMediator tabLayoutMediator;
     private ViewPager2 pager;
-    List<QuestAndAnsOptions> listOfQuestAndAnsOp;
-    List<ImageAndDescription> listOfImagAndDiscr;
-    List<CardData> listOfCardData;
+    private List<QuestAndAnsOptions> listOfQuestAndAnsOp;
+    private List<ImageAndDescription> listOfImagAndDiscr;
+    private List<TheoryCard> listofTheoryCard;
+    private String itemName;
+    private TextView itemNameF;
+    private Integer position;
+    RadioGroup rG;
+    Button qaCheck;
+    Integer corrAnsNum;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,9 +59,10 @@ public class TheorQuizFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.theor_plus_quiz, container, false);
         pager = (ViewPager2) root.findViewById(R.id.pager);
-
+        itemNameF = root.findViewById(R.id.item_nameF);
         tabLayout = (TabLayout) root.findViewById(R.id.tab);
-
+        rG = root.findViewById(R.id.ans_op);
+        qaCheck = root.findViewById(R.id.qaCheck);
         /*Toolbar toolbar = (Toolbar) root.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,32 +77,64 @@ public class TheorQuizFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle arg = this.getArguments();
+        if (arg != null) {
+            itemName = arg.getString("keyForName", "");
+            position = arg.getInt("keyForPosition", 0);
+        }
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        /*ApiInterface blockApi = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<BlockPager>> block = blockApi.getBlocks();*/
 
-        //fragmentPagerAdapter = new FragmentPagerAdapter(getContext());
-        //pager.setAdapter(fragmentPagerAdapter);
+        itemNameF.setText(itemName);
 
+        ApiInterface cardApi = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<TheoryCard>> card = cardApi.getTheor();
 
-        /*block.enqueue(new Callback<List<BlockPager>>(){ //метод.в очереди
+        pagerAdapter = new PagerAdapter(getContext());
+        pager.setAdapter(pagerAdapter);
+
+/*        qaCheck.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                *//*rG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton checkedRadioButton = (RadioButton) rG.findViewById(checkedId);
+                        int checkedIndex = rG.indexOfChild(checkedRadioButton);
+                        Log.d("rrr", "brbrb" + checkedIndex);
+                    }
+                });*//*
+            }
+        }));*/
+
+        card.enqueue(new Callback<List<TheoryCard>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onResponse(Call<List<BlockPager>> call, Response<List<BlockPager>> response) {
-                Log.d("poluchilos", "how are you" );
-            }
-            @Override
-            public void onFailure(Call<List<BlockPager>> call, Throwable t) {
-                Log.d("chmo", t.getLocalizedMessage());
-            }
-        });*/
+            public void onResponse(Call<List<TheoryCard>> call, Response<List<TheoryCard>> response) {
+                listofTheoryCard = response.body();
+                CardData cardData = listofTheoryCard.get(position).getCardData().get(0);
+                Log.d("tagggg", "123" + position);
 
-        List<String> ansOptions = new ArrayList();
+                ArrayList<Object> list = new ArrayList<Object>();
+                for (int i = 0; i < cardData.getImageAndDescriptionList().size(); i = i + 1) {
+                    list.add(cardData.getImageAndDescriptionList().get(i));
+                    list.add(cardData.getQuestAndAnsOptionsList().get(i));
+                }
+                pagerAdapter.setList(list);
+                Log.d("poluchilos", "how are you");
+            }
+
+            @Override
+            public void onFailure(Call<List<TheoryCard>> call, Throwable t) {
+                Log.d("chmo", "1234");
+            }
+        });
+
+       /* List<String> ansOptions = new ArrayList();
         ansOptions.add("Fuck");
 
         List<QuestAndAnsOptions> listOfQuestAndAnsOp = new ArrayList<QuestAndAnsOptions>();
@@ -103,11 +152,9 @@ public class TheorQuizFragment extends Fragment {
         listOfCardData.add(listOfImagAndDiscr.get(1));
         listOfCardData.add(listOfQuestAndAnsOp.get(1));
         //listOfCardData.add(listOfImagAndDiscr.get(2));
-        // listOfCardData.add(listOfQuestAndAnsOp.get(2));
+        // listOfCardData.add(listOfQuestAndAnsOp.get(2));*/
 
 
-        pagerAdapter = new PagerAdapter(getContext(), listOfCardData);
-        pager.setAdapter(pagerAdapter);
         tabLayoutMediator = new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {

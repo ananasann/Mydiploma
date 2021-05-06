@@ -13,7 +13,6 @@ public class ImageAndDescription {
     public ImageAndDescription(String textTheor, String imageUrl) {
         this.imageUrl = imageUrl;
         this.textTheor = textTheor;
-
     }
 
     public String getImageUrl() {

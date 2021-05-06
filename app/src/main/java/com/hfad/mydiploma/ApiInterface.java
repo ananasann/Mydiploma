@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-    @GET("test")             // имя вызываемого метода на сервере - messages1.json - то что нужно добавить к базовому url
+    @GET("themes")             // имя вызываемого метода на сервере - messages1.json - то что нужно добавить к базовому url
     Call<List<TheoryCard>> getTheor();   //List<Product> - это тип возвращаемых данных, messages - имя метода
 
     @POST("tokensignin")

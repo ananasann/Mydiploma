@@ -60,9 +60,13 @@ public class TheoryFragment extends Fragment {
 
         TheoryAdapter.MyClickListener listener = new TheoryAdapter.MyClickListener() {
             @Override
-            public void onItemClick(TheoryCard item) {
+            public void onItemClick(TheoryCard item, Integer position) {
                 //Toast.makeText(getContext(),"TAP " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                Bundle args = new Bundle();
+                args.putString("keyForName", item.getItemName());
+                args.putInt("keyForPosition", position);
                 TheorQuizFragment theorQuizFrag = new TheorQuizFragment();
+                theorQuizFrag.setArguments(args);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.theorFragment, theorQuizFrag, "fiaentTag")
                         .addToBackStack(null)

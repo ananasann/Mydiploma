@@ -6,10 +6,10 @@ import java.util.List;
 
 public class CardData {
 
-    @SerializedName("imageAndDiscr")
+    @SerializedName("imageAndDescription")
     List<ImageAndDescription> imageAndDescriptionList;
 
-    @SerializedName("qAndAnsOp")
+    @SerializedName("questAndAnsOptions")
     List<QuestAndAnsOptions> questAndAnsOptionsList;
 
     public CardData(List<ImageAndDescription> imageAndDescriptionList, List<QuestAndAnsOptions> questAndAnsOptionsList) {

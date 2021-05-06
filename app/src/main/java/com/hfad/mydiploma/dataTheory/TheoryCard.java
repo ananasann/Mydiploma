@@ -26,7 +26,7 @@ public class TheoryCard {
         return title;
     }
     public String getItemName() { return itemName; }
-    public List<CardData> getCardDataList() {
+    public List<CardData> getCardData() {
         return cardDataList;
     }
 }

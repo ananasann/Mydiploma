@@ -13,15 +13,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
 
     <TextView
         android:id="@+id/text_theor_descr"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Описание - теория"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
