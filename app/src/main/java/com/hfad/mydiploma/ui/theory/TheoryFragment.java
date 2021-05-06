@@ -76,7 +76,7 @@ public class TheoryFragment extends Fragment {
 
         theoryAdapter = new TheoryAdapter(getContext(), /*listOfDataTheory,*/ listener);
         theoryRecycler.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        theoryRecycler.setAdapter(theoryAdapter);
+
         //theoryAdapter.setList(listOfDataTheory);
 
 
@@ -88,6 +88,7 @@ public class TheoryFragment extends Fragment {
                 Log.d("henlo", "how are you" + listOfDataTheory);
                 //listOfDataTheory.forEach(item -> Log.d("tag",  " look title " + item.getTitle()));
                 theoryAdapter.setList(listOfDataTheory);
+                theoryRecycler.setAdapter(theoryAdapter);
             }
 
             @Override

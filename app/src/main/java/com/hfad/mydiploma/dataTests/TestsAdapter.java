@@ -18,7 +18,7 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
 
 
     public interface MyClickListener {
-        void onItemClick(TestsCard item);
+        void onItemClick(TestsCard item, Integer position);
     }
 
     private List<TestsCard> mData;
@@ -58,7 +58,7 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mClickListener.onItemClick(testsOnPosition);
+                mClickListener.onItemClick(testsOnPosition, position);
             }
         });
     }

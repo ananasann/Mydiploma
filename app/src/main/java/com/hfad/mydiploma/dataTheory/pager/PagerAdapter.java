@@ -77,7 +77,6 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         RadioButton rB1;
         RadioButton rB2;
         RadioButton rB3;
-        TextView corrAnsNumH;
         Button qaCheck;
         RadioGroup qaGroup;
 
@@ -87,7 +86,6 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             rB1 = qA.findViewById(R.id.radioButton);
             rB2 = qA.findViewById(R.id.radioButton2);
             rB3 = qA.findViewById(R.id.radioButton3);
-            corrAnsNumH = qA.findViewById(R.id.corr_ans_num);
             qaCheck = qA.findViewById(R.id.qaCheck);
             qaGroup = qA.findViewById(R.id.ans_op);
         }

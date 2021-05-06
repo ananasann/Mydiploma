@@ -6,27 +6,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.mydiploma.ApiClient;
 import com.hfad.mydiploma.ApiInterface;
 import com.hfad.mydiploma.R;
+import com.hfad.mydiploma.dataTests.onetest.OneTestData;
 import com.hfad.mydiploma.dataTests.TestsAdapter;
 import com.hfad.mydiploma.dataTests.TestsCard;
-import com.hfad.mydiploma.dataTheory.TheoryAdapter;
-import com.hfad.mydiploma.dataTheory.TheoryCard;
-import com.hfad.mydiploma.ui.theory.TheorQuizFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +31,7 @@ public class TestsFragment extends Fragment {
 
     private RecyclerView testsRecycler;
     private TestsAdapter testsAdapter;
+    List<TestsCard> testsCardList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,18 +43,21 @@ public class TestsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //ApiInterface testApi = ApiClient.getClient().create(ApiInterface.class);
-        //Call<List<TestsCard>> test = testApi.getTest();
+        ApiInterface testApi = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<TestsCard>> tests = testApi.getTest();
 
-        List<TestsCard> listOfTestCard = new ArrayList<TestsCard>();
-        listOfTestCard.add(new TestsCard("Тема: Прореживание сигнала","Дата выполнения: 22.04.2022"));
-        listOfTestCard.add(new TestsCard("Тема: Дискретизация","Дата выполнения: 29.04.2022"));
+       /* List<TestsCard> listOfTestCard = new ArrayList<TestsCard>();
+        listOfTestCard.add(new TestsCard("Тема: Прореживание сигнала","Дата выполнения: 22.04.2022", testDataList));
+        listOfTestCard.add(new TestsCard("Тема: Дискретизация","Дата выполнения: 29.04.2022", testDataList));*/
 
         TestsAdapter.MyClickListener listener = new TestsAdapter.MyClickListener() {
             @Override
-            public void onItemClick(TestsCard item) {
-                Toast.makeText(getContext(),"TAP " + item.getTitleTest(),Toast.LENGTH_SHORT).show();
+            public void onItemClick(TestsCard item, Integer position) {
+                Bundle args = new Bundle();
+                args.putString("keyForNameTest", item.getTitleTest());
+                args.putInt("keyForPositionTest", position);
                 TestThemeFragment testThemeFrag = new TestThemeFragment();
+                testThemeFrag.setArguments(args);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.testsFrag, testThemeFrag, "fiaentTag")
                         .addToBackStack(null)
@@ -73,24 +69,24 @@ public class TestsFragment extends Fragment {
         testsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         //testsRecycler.setLayoutManager(new GridLayoutManager(getActivity(),1));
         testsRecycler.setAdapter(testsAdapter);
-        testsAdapter.setList(listOfTestCard);
+        testsAdapter.setList(testsCardList);
 
 
-       /* theor.enqueue(new Callback<List<TheoryCard>>(){ //метод.в очереди
+       tests.enqueue(new Callback<List<TestsCard>>(){ //метод.в очереди
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onResponse(Call<List<TheoryCard>> call, Response<List<TheoryCard>> response) {
-                listOfDataTheory  = response.body();
-                Log.d("henlo", "how are you" + listOfDataTheory);
-                listOfDataTheory.forEach(item -> Log.d("tag",  " look title " + item.getTitle()));
-                theoryAdapter.setList(listOfDataTheory);
+            public void onResponse(Call<List<TestsCard>> call, Response<List<TestsCard>> response) {
+                testsCardList  = response.body();
+                Log.d("henlo", "how are you" + testsCardList);
+                testsCardList.forEach(item -> Log.d("tag",  " look title " + item.getTitleTest()));
+                testsAdapter.setList(testsCardList);
             }
 
             @Override
-            public void onFailure(Call<List<TheoryCard>> call, Throwable t) {
+            public void onFailure(Call<List<TestsCard>> call, Throwable t) {
                 Log.d("chmo", t.getLocalizedMessage());
             }
-        });*/
+        });
 
 
     }

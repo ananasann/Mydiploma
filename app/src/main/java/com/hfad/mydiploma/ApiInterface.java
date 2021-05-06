@@ -1,5 +1,6 @@
 package com.hfad.mydiploma;
 
+import com.hfad.mydiploma.dataTests.TestsCard;
 import com.hfad.mydiploma.dataTheory.TheoryCard;
 
 
@@ -17,4 +18,7 @@ public interface ApiInterface {
 
     @POST("tokensignin")
     Call<List<AuthAcc>> postAuthAcc(@Body List<AuthAcc> body);
+
+    @GET("testsp")
+    Call<List<TestsCard>> getTest();
 }
