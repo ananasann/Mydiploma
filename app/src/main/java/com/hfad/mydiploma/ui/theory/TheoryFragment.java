@@ -2,7 +2,6 @@ package com.hfad.mydiploma.ui.theory;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,7 @@ import com.hfad.mydiploma.R;
 import com.hfad.mydiploma.ApiClient;
 import com.hfad.mydiploma.dataTheory.TheoryCard;
 import com.hfad.mydiploma.dataTheory.TheoryAdapter;
-import com.hfad.mydiploma.dataTheory.pager.CardData;
-import com.hfad.mydiploma.dataTheory.pager.ImageAndDescription;
-import com.hfad.mydiploma.dataTheory.pager.QuestAndAnsOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,8 +47,6 @@ public class TheoryFragment extends Fragment {
         ApiInterface theoryApi = ApiClient.getClient().create(ApiInterface.class);
         Call<List<TheoryCard>> theor = theoryApi.getTheor();
 
-
-
         //List<TheoryCard> listOfTheorCard = new ArrayList<TheoryCard>();
         //listOfTheorCard.add(new TheoryCard("Тема 1","Фильтрация", listOfCardData));
         //listOfTheorCard.add(new TheoryCard("Тема 2", "Спектр2", listOfCardData));
@@ -61,7 +54,6 @@ public class TheoryFragment extends Fragment {
         TheoryAdapter.MyClickListener listener = new TheoryAdapter.MyClickListener() {
             @Override
             public void onItemClick(TheoryCard item, Integer position) {
-                //Toast.makeText(getContext(),"TAP " + item.getTitle(),Toast.LENGTH_SHORT).show();
                 Bundle args = new Bundle();
                 args.putString("keyForName", item.getItemName());
                 args.putInt("keyForPosition", position);
@@ -74,29 +66,21 @@ public class TheoryFragment extends Fragment {
             }
         };
 
-        theoryAdapter = new TheoryAdapter(getContext(), /*listOfDataTheory,*/ listener);
+        theoryAdapter = new TheoryAdapter(getContext(), listener);
         theoryRecycler.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
-        //theoryAdapter.setList(listOfDataTheory);
-
-
-        theor.enqueue(new Callback<List<TheoryCard>>(){ //метод.в очереди
+        theor.enqueue(new Callback<List<TheoryCard>>(){
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<TheoryCard>> call, Response<List<TheoryCard>> response) {
                 listOfDataTheory  = response.body();
-                Log.d("henlo", "how are you" + listOfDataTheory);
-                //listOfDataTheory.forEach(item -> Log.d("tag",  " look title " + item.getTitle()));
                 theoryAdapter.setList(listOfDataTheory);
                 theoryRecycler.setAdapter(theoryAdapter);
             }
 
             @Override
             public void onFailure(Call<List<TheoryCard>> call, Throwable t) {
-                Log.d("chmo", t.getLocalizedMessage());
             }
         });
-
-
     }
 }

@@ -2,12 +2,10 @@ package com.hfad.mydiploma.ui.theory;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -27,7 +25,6 @@ import com.hfad.mydiploma.dataTheory.pager.CardData;
 import com.hfad.mydiploma.dataTheory.pager.PagerAdapter;
 import com.hfad.mydiploma.dataTheory.pager.ImageAndDescription;
 import com.hfad.mydiploma.dataTheory.pager.QuestAndAnsOptions;
-import com.hfad.mydiploma.ui.account.DevInfFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +39,12 @@ public class TheorQuizFragment extends Fragment {
     private TabLayout tabLayout;
     private TabLayoutMediator tabLayoutMediator;
     private ViewPager2 pager;
-    private List<QuestAndAnsOptions> listOfQuestAndAnsOp;
-    private List<ImageAndDescription> listOfImagAndDiscr;
     private List<TheoryCard> listofTheoryCard;
     private String itemName;
     private TextView itemNameF;
     private Integer position;
     RadioGroup rG;
     Button qaCheck;
-    Integer corrAnsNum;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -97,19 +91,6 @@ public class TheorQuizFragment extends Fragment {
         pagerAdapter = new PagerAdapter(getContext());
         pager.setAdapter(pagerAdapter);
 
-/*        qaCheck.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                *//*rG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        RadioButton checkedRadioButton = (RadioButton) rG.findViewById(checkedId);
-                        int checkedIndex = rG.indexOfChild(checkedRadioButton);
-                        Log.d("rrr", "brbrb" + checkedIndex);
-                    }
-                });*//*
-            }
-        }));*/
 
         card.enqueue(new Callback<List<TheoryCard>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -117,7 +98,6 @@ public class TheorQuizFragment extends Fragment {
             public void onResponse(Call<List<TheoryCard>> call, Response<List<TheoryCard>> response) {
                 listofTheoryCard = response.body();
                 CardData cardData = listofTheoryCard.get(position).getCardData().get(0);
-                Log.d("tagggg", "123" + position);
 
                 ArrayList<Object> list = new ArrayList<Object>();
                 for (int i = 0; i < cardData.getImageAndDescriptionList().size(); i = i + 1) {
@@ -125,12 +105,10 @@ public class TheorQuizFragment extends Fragment {
                     list.add(cardData.getQuestAndAnsOptionsList().get(i));
                 }
                 pagerAdapter.setList(list);
-                Log.d("poluchilos", "how are you");
             }
 
             @Override
             public void onFailure(Call<List<TheoryCard>> call, Throwable t) {
-                Log.d("chmo", "1234");
             }
         });
 

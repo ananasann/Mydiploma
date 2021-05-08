@@ -9,12 +9,12 @@ public class OneTestData {
     String questTest;
 
     @SerializedName("ansOpTest")
-    List<String> ansOpTest;
+    String ansOpTest;
 
     @SerializedName("corrAnsTest")
     Integer corrAnsTest;
 
-    public OneTestData(String quesTest, List<String> ansOpTest, Integer corrAnsTest) {
+    public OneTestData(String quesTest, String ansOpTest, Integer corrAnsTest) {
         this.questTest = quesTest;
         this.ansOpTest = ansOpTest;
         this.corrAnsTest = corrAnsTest;
@@ -23,7 +23,7 @@ public class OneTestData {
     public String getQuesTest() {
         return questTest;
     }
-    public List<String> getAnsOpTest() {
+    public String getAnsOpTest() {
         return ansOpTest; }
 
     public Integer getCorrAnsTest() {

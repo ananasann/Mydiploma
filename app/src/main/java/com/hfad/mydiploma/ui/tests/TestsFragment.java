@@ -2,7 +2,6 @@ package com.hfad.mydiploma.ui.tests;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hfad.mydiploma.ApiClient;
 import com.hfad.mydiploma.ApiInterface;
 import com.hfad.mydiploma.R;
-import com.hfad.mydiploma.dataTests.onetest.OneTestData;
 import com.hfad.mydiploma.dataTests.TestsAdapter;
 import com.hfad.mydiploma.dataTests.TestsCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,26 +62,22 @@ public class TestsFragment extends Fragment {
             }
         };
 
-        testsAdapter = new TestsAdapter(getContext(), /*listOfDataTheory,*/ listener);
+        testsAdapter = new TestsAdapter(getContext(), listener);
         testsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        //testsRecycler.setLayoutManager(new GridLayoutManager(getActivity(),1));
         testsRecycler.setAdapter(testsAdapter);
         testsAdapter.setList(testsCardList);
 
 
-       tests.enqueue(new Callback<List<TestsCard>>(){ //метод.в очереди
+        tests.enqueue(new Callback<List<TestsCard>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<TestsCard>> call, Response<List<TestsCard>> response) {
-                testsCardList  = response.body();
-                Log.d("henlo", "how are you" + testsCardList);
-                testsCardList.forEach(item -> Log.d("tag",  " look title " + item.getTitleTest()));
+                testsCardList = response.body();
                 testsAdapter.setList(testsCardList);
             }
 
             @Override
             public void onFailure(Call<List<TestsCard>> call, Throwable t) {
-                Log.d("chmo", t.getLocalizedMessage());
             }
         });
 

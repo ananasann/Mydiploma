@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -33,9 +31,8 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<Object> mData;
     private LayoutInflater mInflater;
 
-    public PagerAdapter(Context context/*, List<Object> data*/) {
+    public PagerAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
-        /*this.mData = data;*/
     }
 
     public void setList(List<Object> data) {
@@ -43,8 +40,6 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
-
-    // stores and recycles views as they are scrolled off screen
     public class ViewHolderImDes extends RecyclerView.ViewHolder {
         ImageView imageUrlH;
         TextView textTheorH;
@@ -66,7 +61,6 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .load(imageUrl)
                     .apply(requestOptions)
                     .into(imageUrlH);
-            Log.d("vse", "loxi");
             textTheorH.setText(textTeor);
             itemView.setBackgroundColor(Color.rgb(178, 178, 178));
         }
@@ -92,8 +86,6 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public void bind(QuestAndAnsOptions questAndAnsOptions) {
 
-            //itemView.findViewById()
-
             String textQuiz = questAndAnsOptions.textQuiz;
             List<String> ansOptions = questAndAnsOptions.ansOptions;
             Integer corrAnsNum = questAndAnsOptions.corrAnsNum;
@@ -106,19 +98,18 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             qaCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("bla","blabla" + qaGroup.getCheckedRadioButtonId());
-                    if(qaGroup.getCheckedRadioButtonId() != -1) {
+                    if (qaGroup.getCheckedRadioButtonId() != -1) {
                         View view = itemView.findViewById(qaGroup.getCheckedRadioButtonId());
                         int index = qaGroup.indexOfChild(view);
                         int trueIndex = index / 2;
 
                         if (trueIndex == questAndAnsOptions.corrAnsNum - 1) {
                             Toast.makeText(itemView.getContext(), "Correct", Toast.LENGTH_SHORT).show();
-                            view.setBackgroundColor(Color.rgb(	114, 202, 124));
+                            view.setBackgroundColor(Color.rgb(114, 202, 124));
 
                         } else {
                             Toast.makeText(itemView.getContext(), "Not correct", Toast.LENGTH_SHORT).show();
-                            view.setBackgroundColor(Color.rgb(	202, 124, 114));
+                            view.setBackgroundColor(Color.rgb(202, 124, 114));
                         }
 
                         final Handler handler = new Handler(Looper.getMainLooper());
@@ -130,7 +121,7 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                                 rB3.setBackgroundColor(Color.TRANSPARENT);
                             }
                         }, 1000);
-                    } else  {
+                    } else {
                         Toast.makeText(itemView.getContext(), "Not checked", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -183,13 +174,11 @@ public class PagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 ViewHolderImDes viewHolderImDes = (ViewHolderImDes) holder;
 
                 viewHolderImDes.bind((ImageAndDescription) obgectOnPosition);
-                Log.d("TAG", "1");
                 break;
 
             case 2:
                 ViewHolderQuesA viewHolderQuesA = (ViewHolderQuesA) holder;
 
-                Log.d("TAG", "2");
                 viewHolderQuesA.bind((QuestAndAnsOptions) obgectOnPosition);
 
                 break;

@@ -21,7 +21,6 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,10 +55,11 @@
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Вариант ответа 1"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:paddingVertical="4dp"/>
 
             <View
                 android:id="@+id/view2"
@@ -70,10 +70,11 @@
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Вариант ответа 2"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:paddingVertical="4dp"/>
 
             <View
                 android:id="@+id/view3"
@@ -84,10 +85,11 @@
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Вариант ответа 3"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:paddingVertical="4dp"/>
 
             <View
                 android:id="@+id/view4"

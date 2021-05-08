@@ -1,17 +1,12 @@
 package com.hfad.mydiploma.ui.tests;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,18 +15,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.hfad.mydiploma.ApiClient;
 import com.hfad.mydiploma.ApiInterface;
-import com.hfad.mydiploma.MainActivity;
+
+import com.hfad.mydiploma.GradeBody;
+
 import com.hfad.mydiploma.R;
-import com.hfad.mydiploma.dataTests.TestsAdapter;
+
 import com.hfad.mydiploma.dataTests.TestsCard;
 import com.hfad.mydiploma.dataTests.onetest.OneTestAdapter;
 import com.hfad.mydiploma.dataTests.onetest.OneTestData;
-import com.hfad.mydiploma.dataTheory.pager.CardData;
-import com.hfad.mydiploma.ui.account.GradesFragment;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -49,6 +47,8 @@ public class TestThemeFragment extends Fragment {
     private Button buttonSubmit;
     List<OneTestData> listOfOneTestData;
     private Integer grade;
+    public long finalGrade;
+    GoogleSignInAccount buffAccTest;
 
     private Integer[] editTextDataHolder = new Integer[500];
 
@@ -72,7 +72,6 @@ public class TestThemeFragment extends Fragment {
         }
         /*getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);*/
-        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     @Override
@@ -97,42 +96,56 @@ public class TestThemeFragment extends Fragment {
             }
         });
         oneTestRec.setLayoutManager(new LinearLayoutManager(getContext()));
-        //testsRecycler.setLayoutManager(new GridLayoutManager(getActivity(),1));
         oneTestRec.setAdapter(oneTestAdapter);
 
         buttonSubmit.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Toast.makeText(getContext(), "Не все поля заполнены", Toast.LENGTH_SHORT).show();
                 grade = 0;
                 for (int i = 0; i < listOfOneTestData.size(); i++) {
                     boolean isCorrect = listOfOneTestData.get(i).getCorrAnsTest().equals(editTextDataHolder[i]);
-                    Log.d("TAG", "answer: " + i + " isCorrect=" + isCorrect);
-                    if (isCorrect){
+                    if (isCorrect) {
                         grade++;
                     }
                 }
-                long finalGrade = Math.round(Double.valueOf(grade) / Double.valueOf(listOfOneTestData.size()) * 10);
+                finalGrade = Math.round(Double.valueOf(grade) / Double.valueOf(listOfOneTestData.size()) * 10);
             }
         }));
 
-        oneTest.enqueue(new Callback<List<TestsCard>>() { //метод.в очереди
+        oneTest.enqueue(new Callback<List<TestsCard>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<TestsCard>> call, Response<List<TestsCard>> response) {
                 testsCardList = response.body();
                 List<OneTestData> oneTestData = testsCardList.get(position).getTestDataListData();//.get(0);
-                Log.d("henlo", "how are you" + testsCardList);
-                testsCardList.forEach(item -> Log.d("tag", " look title " + item.getTitleTest()));
                 oneTestAdapter.setList(oneTestData);
                 listOfOneTestData = oneTestData;
             }
-
             @Override
             public void onFailure(Call<List<TestsCard>> call, Throwable t) {
-                Log.d("chmo", t.getLocalizedMessage());
             }
         });
+
+        buffAccTest = GoogleSignIn.getLastSignedInAccount(getContext());
+        String accTokenTest = buffAccTest.getIdToken();
+
+
+        GradeBody body = new GradeBody(
+                String.valueOf(finalGrade), accTokenTest
+        );
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Void> postGradeCall = apiInterface.postGrade(body);
+
+        postGradeCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<Void> call, @NotNull Throwable t) {
+            }
+
+        });
+
     }
 }

@@ -1,5 +1,6 @@
 package com.hfad.mydiploma;
 
+import com.google.gson.annotations.SerializedName;
 import com.hfad.mydiploma.dataTests.TestsCard;
 import com.hfad.mydiploma.dataTheory.TheoryCard;
 
@@ -13,12 +14,15 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-    @GET("themes")             // имя вызываемого метода на сервере - messages1.json - то что нужно добавить к базовому url
-    Call<List<TheoryCard>> getTheor();   //List<Product> - это тип возвращаемых данных, messages - имя метода
+    @GET("themes")
+    Call<List<TheoryCard>> getTheor();
 
     @POST("tokensignin")
     Call<List<AuthAcc>> postAuthAcc(@Body List<AuthAcc> body);
 
     @GET("testsp")
     Call<List<TestsCard>> getTest();
+
+    @POST("grade")
+    Call<Void> postGrade(@Body GradeBody body);
 }
