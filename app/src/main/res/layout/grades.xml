@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Прореживание сигнала"
+                android:text="Спектральный анализ"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textAppearance="?android:attr/textAppearanceMedium"

@@ -27,6 +27,7 @@ import com.hfad.mydiploma.R;
 import com.hfad.mydiploma.dataTests.TestsCard;
 import com.hfad.mydiploma.dataTests.onetest.OneTestAdapter;
 import com.hfad.mydiploma.dataTests.onetest.OneTestData;
+import com.hfad.mydiploma.ui.account.GradesFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -109,6 +110,12 @@ public class TestThemeFragment extends Fragment {
                     }
                 }
                 finalGrade = Math.round(Double.valueOf(grade) / Double.valueOf(listOfOneTestData.size()) * 10);
+
+                TestsFragment testsFragment = new TestsFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.testsFrag, testsFragment, "fragTag")
+                        .addToBackStack(null)
+                        .commit();
             }
         }));
 
